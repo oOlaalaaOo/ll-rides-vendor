@@ -1,0 +1,12 @@
+@import './nprogress.css';
+@import './validation-message.css';
+@import './snackbar.css';
+@import './scrollbar.css';
+
+/* purgecss start ignore */
+@import 'tailwindcss/base';
+/* purgecss end ignore */
+
+@import 'tailwindcss/components';
+
+@import 'tailwindcss/utilities';
