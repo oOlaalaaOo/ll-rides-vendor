@@ -21,8 +21,8 @@ import {
 const LoginFormTemplate: React.FC<any> = () => {
   const [error, setError] = useState({
     status: false,
+    title: '',
     message: '',
-    description: '',
   });
 
   return (
@@ -52,8 +52,8 @@ const LoginFormTemplate: React.FC<any> = () => {
             try {
               setError({
                 status: false,
+                title: '',
                 message: '',
-                description: '',
               });
 
               const resp = await authApi.login(values.email, values.password);
@@ -61,14 +61,14 @@ const LoginFormTemplate: React.FC<any> = () => {
               await localStorageUtil.setItem('accessToken', resp.accessToken);
               cookieUtil.setCookie('accessToken', resp.accessToken);
 
-              Router.push('/user/dashboard');
+              Router.replace('/user/dashboard')
             } catch (err) {
               const { data } = err.response;
 
               setError({
                 status: true,
-                message: 'Login Error',
-                description: data.error,
+                title: 'Login Fail!',
+                message: data.error,
               });
             } finally {
               setSubmitting(false);
@@ -76,7 +76,7 @@ const LoginFormTemplate: React.FC<any> = () => {
           }}
         >
           {({ isSubmitting }) => (
-            <Form className='w-1/4 px-3 py-3 border rounded shadow'>
+            <Form className='w-1/4 px-3 py-3 border rounded shadow bg-light'>
               <div>
                 <img
                   src='/images/logo.png'
@@ -87,13 +87,13 @@ const LoginFormTemplate: React.FC<any> = () => {
                 {error.status === true ? (
                   <Alert
                     type='danger'
-                    title='Test Error Title ddddddddd'
-                    message='Test Error Message lorem opsuom neonday no'
+                    title={error.title}
+                    message={error.message}
                     onClose={() => {
                       setError({
                         status: false,
+                        title: '',
                         message: '',
-                        description: '',
                       });
                     }}
                   />
@@ -128,7 +128,7 @@ const LoginFormTemplate: React.FC<any> = () => {
               <div className='my-2'>
                 <Button
                   type='submit'
-                  className='bg-blue-500 text-white py-1 w-full rounded'
+                  className='bg-primary text-white py-1 w-full rounded'
                   label='Login'
                   disabled={isSubmitting}
                   loading={isSubmitting}
@@ -139,7 +139,7 @@ const LoginFormTemplate: React.FC<any> = () => {
 
               <div>
                 <Button
-                  className='bg-white text-black py-1 w-full rounded'
+                  className='bg-light text-black py-1 w-full rounded'
                   onClick={(
                     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
                   ) => {

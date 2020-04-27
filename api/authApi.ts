@@ -7,7 +7,7 @@ const login = async (email: string, password: string): Promise<any> => {
       password: password
     };
 
-    const resp = await apiService.loginReq('auth/login', payload);
+    const resp = await apiService.loginReq('auth/vendor/login', payload);
 
     return resp;
   } catch (err) {
@@ -28,7 +28,7 @@ const register = async (
     };
 
     const resp = await apiService.postReq(
-      'auth/register',
+      'auth/vendor/register',
       payload,
       null,
       false,

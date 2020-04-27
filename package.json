@@ -1,7 +1,7 @@
 {
-  "name": "ll-rides",
+  "name": "ll-rides-vendor",
   "version": "1.0.0",
-  "description": "ll-rides app",
+  "description": "ll-rides-vendor app",
   "main": "index.js",
   "scripts": {
     "dev": "node server.js",

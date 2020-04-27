@@ -21,8 +21,8 @@ import {
 const RegisterFormTemplate: React.FC<any> = () => {
   const [error, setError] = useState({
     status: false,
+    title: '',
     message: '',
-    description: '',
   });
 
   return (
@@ -66,8 +66,8 @@ const RegisterFormTemplate: React.FC<any> = () => {
             try {
               setError({
                 status: false,
+                title: '',
                 message: '',
-                description: '',
               });
 
               await authApi.register(
@@ -79,11 +79,11 @@ const RegisterFormTemplate: React.FC<any> = () => {
               Router.push('/auth/login');
             } catch (err) {
               const { data } = err.response;
-
+              console.log(data);
               setError({
                 status: true,
-                message: 'Login Error',
-                description: data.error,
+                title: 'Registration Fail',
+                message: data.error,
               });
             } finally {
               setSubmitting(false);
@@ -102,13 +102,13 @@ const RegisterFormTemplate: React.FC<any> = () => {
                 {error.status === true ? (
                   <Alert
                     type='danger'
-                    title='Test Error Title ddddddddd'
-                    message='Test Error Message lorem opsuom neonday no'
+                    title={error.title}
+                    message={error.message}
                     onClose={() => {
                       setError({
                         status: false,
+                        title: '',
                         message: '',
-                        description: '',
                       });
                     }}
                   />

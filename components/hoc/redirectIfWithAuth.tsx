@@ -10,7 +10,7 @@ const redirectIfWithAuth = (Page: NextPage<any>) => {
 
       if (accessToken) {
         if (res) {
-          res.writeHead(200, {
+          res.writeHead(301, {
             Location: '/user/dashboard',
           });
 

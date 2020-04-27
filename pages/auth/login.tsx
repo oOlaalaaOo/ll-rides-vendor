@@ -1,6 +1,7 @@
 import MainLayout from '../../components/layouts/MainLayout';
 import LoginFormTemplate from '../../components/templates/LoginFormTemplate';
 import { NextPage } from 'next';
+import redirectIfWithAuth from '../../components/hoc/redirectIfWithAuth';
 
 const Login: NextPage<any> = () => {
   return (
@@ -10,4 +11,4 @@ const Login: NextPage<any> = () => {
   );
 };
 
-export default Login;
+export default redirectIfWithAuth(Login);

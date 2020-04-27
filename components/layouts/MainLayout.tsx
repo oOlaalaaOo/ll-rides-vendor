@@ -11,7 +11,7 @@ type Props = {
 const MainLayout: FC<Props> = ({
   children,
   title = 'LL Rides',
-  bgColor = 'bg-primary',
+  bgColor = 'bg-secondary',
 }) => {
   return (
     <>
@@ -19,7 +19,7 @@ const MainLayout: FC<Props> = ({
         <title>{title}</title>
       </Head>
       <Snackbar />
-      <div className={`${bgColor}`}>{children}</div>
+      <div className={`${bgColor} min-h-screen`}>{children}</div>
     </>
   );
 };
