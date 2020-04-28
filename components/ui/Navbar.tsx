@@ -1,4 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
+import Router from 'next/router';
+import { IconNotification, IconUser } from './Icons';
 
 const Navbar = () => {
   const [showUserDropdown, setShowUserDropdown] = useState(false);
@@ -14,6 +16,10 @@ const Navbar = () => {
         setShowNotificationDropdown(false);
       }
     }
+  };
+
+  const handleLinkClick = (link: string) => {
+    Router.push(link);
   };
 
   useEffect(() => {
@@ -35,6 +41,7 @@ const Navbar = () => {
                   <a
                     href='#'
                     className='px-3 py-2 rounded-md text-sm font-medium text-white hover:text-white hover:bg-dark focus:outline-none focus:text-white focus:bg-dark'
+                    onClick={() => handleLinkClick('/user/dashboard')}
                   >
                     Dashboard
                   </a>
@@ -77,25 +84,13 @@ const Navbar = () => {
                         setShowUserDropdown(false);
                       }}
                     >
-                      <svg
-                        className='h-6 w-6'
-                        stroke='currentColor'
-                        fill='none'
-                        viewBox='0 0 24 24'
-                      >
-                        <path
-                          strokeLinecap='round'
-                          strokeLinejoin='round'
-                          strokeWidth='2'
-                          d='M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9'
-                        />
-                      </svg>
+                      <IconNotification className='text-white' />
                     </button>
                   </div>
                   <div className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg'>
                     {showNotificationDropdown === true ? (
                       <div
-                        className='py-1 rounded-md bg-white shadow-xs'
+                        className='py-1 rounded-md bg-white shadow-xs z-50'
                         role='menu'
                         aria-orientation='vertical'
                         aria-labelledby='user-menu'
@@ -105,21 +100,7 @@ const Navbar = () => {
                           className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                           role='menuitem'
                         >
-                          Your Profile2
-                        </a>
-                        <a
-                          href='#'
-                          className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                          role='menuitem'
-                        >
-                          Settings
-                        </a>
-                        <a
-                          href='#'
-                          className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
-                          role='menuitem'
-                        >
-                          Sign out
+                          Some notification title
                         </a>
                       </div>
                     ) : null}
@@ -129,7 +110,7 @@ const Navbar = () => {
                 <div className='ml-3 relative'>
                   <div>
                     <button
-                      className='max-w-xs flex items-center text-sm rounded-full text-white focus:outline-none focus:shadow-solid'
+                      className='p-1 border-2 border-transparent text-gray-400 rounded-full hover:text-white focus:outline-none focus:text-white focus:bg-dark'
                       id='user-menu'
                       aria-label='User menu'
                       aria-haspopup='true'
@@ -138,14 +119,10 @@ const Navbar = () => {
                         setShowNotificationDropdown(false);
                       }}
                     >
-                      <img
-                        className='h-8 w-8 rounded-full'
-                        src='/images/logo.png'
-                        alt=''
-                      />
+                      <IconUser className='text-white' />
                     </button>
                   </div>
-                  <div className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg'>
+                  <div className='origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg z-50'>
                     {showUserDropdown === true ? (
                       <div
                         className='py-1 rounded-md bg-white shadow-xs'
@@ -157,8 +134,9 @@ const Navbar = () => {
                           href='#'
                           className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100'
                           role='menuitem'
+                          onClick={() => handleLinkClick('/user/profile')}
                         >
-                          Your Profile2
+                          Your Profile
                         </a>
                         <a
                           href='#'
@@ -218,6 +196,7 @@ const Navbar = () => {
             <a
               href='#'
               className='block px-3 py-2 rounded-md text-base font-medium text-white bg-gray-900 focus:outline-none focus:text-white focus:bg-dark'
+              onClick={() => handleLinkClick('/user/dashboard')}
             >
               Dashboard
             </a>
@@ -287,21 +266,6 @@ const Navbar = () => {
           </div>
         </div>
       </nav>
-
-      <header className='bg-white shadow'>
-        <div className='max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8'>
-          <h1 className='text-3xl font-bold leading-tight text-gray-900'>
-            Dashboard
-          </h1>
-        </div>
-      </header>
-      <main>
-        <div className='max-w-7xl mx-auto py-6 sm:px-6 lg:px-8'>
-          <div className='px-4 py-6 sm:px-0'>
-            <div className='border-4 border-dashed border-gray-200 rounded-lg h-96'></div>
-          </div>
-        </div>
-      </main>
     </>
   );
 };

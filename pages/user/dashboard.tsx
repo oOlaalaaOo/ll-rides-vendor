@@ -1,9 +1,8 @@
-import MainLayout from '../../components/layouts/MainLayout';
+import UserLayout from '../../components/layouts/UserLayout';
 import { NextPage } from 'next';
 import withAuth from '../../components/hoc/withAuth';
 import useSocketIOListener from '../../hooks/useSocketIOListener';
 import { useEffect } from 'react';
-import { Navbar } from '../../components/ui';
 
 const Dashboard: NextPage<any> = () => {
   const eventData = useSocketIOListener('testEvent');
@@ -15,9 +14,9 @@ const Dashboard: NextPage<any> = () => {
   }, [eventData]);
 
   return (
-    <MainLayout>
-      <Navbar />
-    </MainLayout>
+    <UserLayout headerTitle='Dashboard'>
+      <h1>Body</h1>
+    </UserLayout>
   );
 };
 
